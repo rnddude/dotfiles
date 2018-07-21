@@ -14,6 +14,12 @@ alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
 alias g="git"
 
+# Type 'tw' on the terminal to open TextWrangler
+alias twalias='open -a /Applications/TextWrangler.app'
+
+# Type 'subl' on the terminal to open Sublime Text
+alias sublalias='open -a /Applications/Sublime\ Text.app'
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"
@@ -69,8 +75,8 @@ alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
