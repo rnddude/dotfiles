@@ -11,11 +11,21 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
+[color "branch"]
+    current = green bold
+    local = green
+    remote = yellow
+[color "diff"]
+    frag = magenta
+    meta = yellow
+    new = green
+    old = red
+    newMoved = cyan
+    oldMoved = blue
+[color "status"]
+    added = green reverse
+    changed = yellow reverse
+    untracked = red reverse
 [push]
 	default = simple
 [pretty]
@@ -23,10 +33,8 @@
 [alias]
     a   = commit --amend
     br  = branch
-    c   = commit
-	ca = commit -a
-	cm = commit -m
-	cam = commit -am
+	c = commit -m
+	ca = commit -am
 	co = checkout
 	cp  = cherry-pick
   	d = diff
@@ -35,6 +43,10 @@
 	#l = log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
     g   = log --graph --pretty=custom           # Show custom graph.
     l   = log --pretty=custom                   # Show custom log.
+    lc  = shortlog --email --numbered --summary # List contributors.
+    p   = push
+    r   = rebase
+    s   = status
     # List remote branches.
     lrb = "!f() { \
         remote="${1:-origin}"; \
@@ -45,4 +57,22 @@
     retag = "!f() { \
         git tag -d "$1" &> /dev/null; \
         git tag $1; \
+    }; f"
+    # Find commits by source code.s
+    cc = "!f() { \
+        git log --pretty=custom --decorate --date=short -S\"$1\"; \
+    }; f"
+    # Find commits by commit message.
+    cm = "!f() { \
+        git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
+    }; f"
+    # Remove last commits (by default it removes the last commit).
+    rlc = "!f() { \
+        declare n=\"${1:-1}\"; \
+        git reset --hard \"HEAD~$n\"; \
+    }; f"
+    # Undo last commits (by default it undoes the last commit).
+    ulc = "!f() { \
+        declare n=\"${1:-1}\"; \
+        git reset --soft \"HEAD~$n\"; \
     }; f"
