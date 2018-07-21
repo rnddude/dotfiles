@@ -1,11 +1,16 @@
 [user]
 	name = rnddude
 	email = rnddude@icloud.com
+[core]
+    abbrev = 12
+    attributesfile = ~/.gitattributes
+    autocrlf = input
+    excludesfile = ~/.gitignore
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 [color]
 	branch = auto
 	diff = auto
@@ -13,11 +18,31 @@
 	status = auto
 [push]
 	default = simple
+[pretty]
+    custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
 [alias]
-	c = commit
+    a   = commit --amend
+    br  = branch
+    c   = commit
 	ca = commit -a
 	cm = commit -m
 	cam = commit -am
+	co = checkout
+	cp  = cherry-pick
   	d = diff
 	dc = diff --cached
-	l = log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
+	f = fetch
+	#l = log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
+    g   = log --graph --pretty=custom           # Show custom graph.
+    l   = log --pretty=custom                   # Show custom log.
+    # List remote branches.
+    lrb = "!f() { \
+        remote="${1:-origin}"; \
+        git ls-remote --heads "$remote"; \
+    }; f"
+    # Remove the tag with the specified tag name if
+    # exists and tag the latest commit with that name.
+    retag = "!f() { \
+        git tag -d "$1" &> /dev/null; \
+        git tag $1; \
+    }; f"

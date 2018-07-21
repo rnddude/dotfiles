@@ -15,7 +15,6 @@ alias p="cd ~/projects"
 alias g="git"
 
 # Shorter commands for `Homebrew`.
-
 alias brewd="brew doctor"
 alias brewi="brew install"
 alias brewr="brew uninstall"
@@ -74,6 +73,10 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # Show active network interfaces
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+# Clear DNS cache.
+alias clear-dns-cache="sudo dscacheutil -flushcache; \
+                       sudo killall -HUP mDNSResponder"
 
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
