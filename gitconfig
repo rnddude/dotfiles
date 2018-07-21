@@ -1,11 +1,18 @@
 [user]
 	name = rnddude
 	email = rnddude@icloud.com
+[apply]
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
 [core]
     abbrev = 12
     attributesfile = ~/.gitattributes
     autocrlf = input
     excludesfile = ~/.gitignore
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 [diff]
     # Show blocks of moved text of at least 20
     # alphanumeric characters differently than adds/deletes.
