@@ -6,6 +6,12 @@
     attributesfile = ~/.gitattributes
     autocrlf = input
     excludesfile = ~/.gitignore
+[diff]
+    # Show blocks of moved text of at least 20
+    # alphanumeric characters differently than adds/deletes.
+    #
+    # https://git-scm.com/docs/git-diff#git-diff-zebra
+    colorMoved = zebra
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
@@ -31,7 +37,8 @@
 [pretty]
     custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
 [alias]
-    a   = commit --amend
+	a  = add
+    am   = commit --amend
     br  = branch
 	c = commit -m
 	ca = commit -am
