@@ -155,19 +155,6 @@ function subl() {
 	fi;
 }
 
-# `tw` with no arguments opens the current directory in Text Wrangler, otherwise
-# opens the given location
-function tw() {
-	if [ $# -eq 0 ]; then
-		twalias .;
-	else
-		if [ ! -f "$@" ]; then
-    		touch "$@";
-		fi
-		twalias "$@";
-	fi;
-}
-
 # `o` with no arguments opens the current directory, otherwise opens the given
 # location
 function o() {

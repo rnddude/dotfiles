@@ -24,9 +24,6 @@ alias brewu="brew update \
                 && brew cleanup \
                 && brew cask cleanup"
 
-# Type 'tw' on the terminal to open TextWrangler
-alias twalias='open -a /Applications/TextWrangler.app'
-
 # Type 'subl' on the terminal to open Sublime Text
 alias sublalias='open -a /Applications/Sublime\ Text.app'
 
