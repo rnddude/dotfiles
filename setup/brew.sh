@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Install Homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+
 # Install command-line tools using Homebrew.
 
 # Make sure we’re using the latest Homebrew.
@@ -33,11 +37,24 @@ brew install ack
 brew install unrar
 brew install findutils
 
+# Install docker
+brew install docker
+brew install docker-machine
+brew install docker-compose
+
 # Install cask
 brew install cask
+brew cask install atom
 brew cask install sublime
+brew cask install evernote
+brew cask install skitch
+brew cask install google-chrome
+brew cask install keepassx
 brew cask install the-unarchiver
 brew cask install virtualbox
 
 # Remove outdated versions from the cellar.
-brew cleanup		
+brew cleanup
+
+# Check
+brew doctor
