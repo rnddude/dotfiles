@@ -22,3 +22,7 @@ export MANPAGER='less -X';
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
+
+# Make new shells get the history lines from all previous
+# shells instead of the default "last window closed" history.
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
