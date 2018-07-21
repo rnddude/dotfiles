@@ -19,11 +19,25 @@ brew install grep
 brew install openssh
 
 # Install other useful binaries.
+brew install htop
+brew install nmap
+brew install bash-completion
 brew install git
 brew install git-lfs
 brew install ssh-copy-id
 brew install tree
 brew install pcre
+brew install jq
+brew install lftp
+brew install ack
+brew install unrar
+brew install findutils
+
+# Install cask
+brew install cask
+brew cask install sublime
+brew cask install the-unarchiver
+brew cask install virtualbox
 
 # Remove outdated versions from the cellar.
 brew cleanup		
