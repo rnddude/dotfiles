@@ -172,3 +172,31 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# usefull function to work with multiple git repositories
+all() {
+    failed=0
+    printf '>>> START RUNNING: "%s" >>>' "$*"
+    for d in */; do
+        pushd "$d" > /dev/null
+        if [ -d ".git" ]
+        then
+            printf '\n--------------------------------------------\n\n'
+            pwd
+            eval $@
+            if [ $? -ne 0 ]
+            then
+                failed=1
+                break;
+            fi
+        fi
+        popd > /dev/null
+    done
+    if [ $failed -eq 0 ]
+    then
+        printf '\n--------------------------------------------\n'
+        printf '<<< RAN "%s" WITH SUCCESS!!! <<<' "$*"
+    else
+        printf '\n<<< FAILED!!! <<<'
+    fi
+}
