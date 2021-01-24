@@ -1,0 +1,34 @@
+#!/usr/bin/sh
+
+autoload -U colors zsh/terminfo
+colors
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git hg
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git*' formats "%{${fg[cyan]}%}[%{${fg[green]}%}%s%{${fg[cyan]}%}][%{${fg[blue]}%}%r/%S%%{${fg[cyan]}%}][%{${fg[blue]}%}%b%{${fg[yellow]}%}%m%u%c%{${fg[cyan]}%}]%{$reset_color%}"
+
+setprompt() {
+  setopt prompt_subst
+
+  # Highlight the user name when logged in as root.
+  if [[ "${USER}" == "root" ]]; then
+	userStyle="%F{red}";
+  else
+	userStyle="%F{166}";
+  fi;
+
+  # Highlight the hostname when connected via SSH.
+  if [[ "${SSH_TTY}" ]]; then
+	hostStyle="%B%F{red}";
+  else
+	hostStyle="%F{yellow}";
+  fi;
+
+  PS1='${userStyle}%n %F{white}at ${hostStyle}%m %F{white}in %B%F{green}%~%f%b %# '
+
+  PS2=$'%_>'
+  RPROMPT=$'${vcs_info_msg_0_}'
+}
+
+setprompt
