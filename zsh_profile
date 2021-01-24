@@ -6,24 +6,47 @@ for file in ~/.{zsh_path,zsh_prompt,zsh_windowtitle,zsh_options,zsh_exports,zsh_
 done;
 unset file;
 
-# Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
-fi;
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
-# Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-	complete -o default -o nospace -F _git g;
-fi;
+# partial completion suggestions
+zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix 
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+autoload -Uz compinit && compinit
 
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
+# Keys.
+case $TERM in
+    rxvt*|xterm*)
+        bindkey "^[[7~" beginning-of-line #Home key
+        bindkey "^[[8~" end-of-line #End key
+        bindkey "^[[3~" delete-char #Del key
+        bindkey "^[[A" history-beginning-search-backward #Up Arrow
+        bindkey "^[[B" history-beginning-search-forward #Down Arrow
+        bindkey "^[Oc" forward-word # control + right arrow
+        bindkey "^[Od" backward-word # control + left arrow
+        bindkey "^H" backward-kill-word # control + backspace
+        bindkey "^[[3^" kill-word # control + delete
+    ;;
 
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+    linux)
+        bindkey "^[[1~" beginning-of-line #Home key
+        bindkey "^[[4~" end-of-line #End key
+        bindkey "^[[3~" delete-char #Del key
+        bindkey "^[[A" history-beginning-search-backward
+        bindkey "^[[B" history-beginning-search-forward
+    ;;
+
+    screen|screen-*)
+        bindkey "^[[1~" beginning-of-line #Home key
+        bindkey "^[[4~" end-of-line #End key
+        bindkey "^[[3~" delete-char #Del key
+        bindkey "^[[A" history-beginning-search-backward #Up Arrow
+        bindkey "^[[B" history-beginning-search-forward #Down Arrow
+        bindkey "^[Oc" forward-word # control + right arrow
+        bindkey "^[OC" forward-word # control + right arrow
+        bindkey "^[Od" backward-word # control + left arrow
+        bindkey "^[OD" backward-word # control + left arrow
+        bindkey "^H" backward-kill-word # control + backspace
+        bindkey "^[[3^" kill-word # control + delete
+    ;;
+esac

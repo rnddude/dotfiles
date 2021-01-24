@@ -18,3 +18,8 @@ setopt histreduceblanks;
 
 # Automatically prepend `cd` to directory names.
 setopt autocd;
+
+# Turn on command substitution in the prompt (and parameter expansion and arithmetic expansion).
+setopt promptsubst;
+
+unsetopt beep
