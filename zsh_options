@@ -1,0 +1,20 @@
+#!/usr/bin/sh
+
+# Case-insensitive globbing (used in pathname expansion)
+setopt nocaseglob;
+
+# Include filenames beginning with a "." in the filename expansion.
+setopt dotglob;
+
+# Configure shell history to be appended with each command, shared and extended with additional data
+setopt histappend;
+setopt incappendhistory;
+setopt sharehistory;
+setopt extendedhistory;
+# do not store duplications
+setopt histignoredups;
+# removes blank lines from history
+setopt histreduceblanks;
+
+# Automatically prepend `cd` to directory names.
+setopt autocd;

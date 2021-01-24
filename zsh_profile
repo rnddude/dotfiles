@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/sh
 
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_path,bash_prompt,bash_options,bash_exports,bash_aliases,bash_functions}; do
+for file in ~/.{zsh_path,zsh_prompt,zsh_windowtitle,zsh_options,zsh_exports,zsh_aliases,zsh_functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
