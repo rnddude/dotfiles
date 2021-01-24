@@ -12,7 +12,7 @@ declare -a FILES_TO_SYMLINK=(
     "zsh_aliases"
     "zsh_options"
     "zsh_prompt"
-    "zsh_function"
+    "zsh_functions"
     "zsh_exports"
     "zsh_path"
     "zsh_windowtitle"
